@@ -190,6 +190,11 @@ class GuestPassTest extends DuskTestCase
      */
     public function verifyStep1($browser){
 
+        Browser::macro('selectSecondOption', function ($element = null) {
+            $this->script("$('select[name=\"{$element}\"] option:eq(1)').attr('selected', 'selected');");
+            return $this;
+        });
+
         $browser->visit('/')
             ->click('a[href$="TEMPORARYPERMIT"]')
             ->assertSee('Step 1 - Your Location')
@@ -201,11 +206,8 @@ class GuestPassTest extends DuskTestCase
             ->waitForText('Choose Address')
             ->assertSelectHasOptions('ctl00$ContentPlaceHolder1$Wizard1$WucUnitSelector1$scboPropertyAddressIDFK', array_keys($this->address_ids))
             ->select('ctl00$ContentPlaceHolder1$Wizard1$WucUnitSelector1$scboPropertyAddressIDFK', array_search('12347 N Aragon Way', $this->address_ids))
-            ->waitForText('Choose Unit Number');
-
-            $text = $browser->text('#ctl00$ContentPlaceHolder1$Wizard1$WucUnitSelector1$scboUnitIDFK > option');
-            echo $text;
-        //$browser->select('')
-            //->press('ctl00$ContentPlaceHolder1$Wizard1$StartNavigationTemplateContainerID$StartNextButton');
+            ->waitForText('Choose Unit Number')
+            ->selectSecondOption('ctl00$ContentPlaceHolder1$Wizard1$WucUnitSelector1$scboUnitIDFK')
+            ->press('ctl00$ContentPlaceHolder1$Wizard1$StartNavigationTemplateContainerID$StartNextButton');
     }
 }
