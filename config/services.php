@@ -45,7 +45,7 @@ return [
     ],
 
     'select-patrol' => [
-        'guest-pass-url' => env('SP_GUEST_PARKING_URL', 'https://spa.silvertracker.net/Subscriber/GuestParkingPermit/GuestPermitRequest.aspx'),
+        'guest-pass-url' => env('SP_GUEST_PARKING_URL', 'https://www.selectpatrol.com/cabrillo-collection-hoa/'),
     ],
 
 ];
