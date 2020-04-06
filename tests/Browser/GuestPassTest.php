@@ -209,6 +209,7 @@ class GuestPassTest extends DuskTestCase
             ->select('ctl00$ContentPlaceHolder1$Wizard1$WucUnitSelector1$scboPropertyAddressIDFK', array_search('12347 N Aragon Way', $this->address_ids))
             ->waitForText('Choose Unit Number')
             ->selectSecondOption('ctl00$ContentPlaceHolder1$Wizard1$WucUnitSelector1$scboUnitIDFK')
-            ->press('ctl00$ContentPlaceHolder1$Wizard1$StartNavigationTemplateContainerID$StartNextButton');
+            ->press('ctl00$ContentPlaceHolder1$Wizard1$StartNavigationTemplateContainerID$StartNextButton')
+            ->assertSee('If you do not fill out your email address');
     }
 }
