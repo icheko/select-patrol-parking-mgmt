@@ -10,7 +10,7 @@ class GuestPassTests extends Controller
     function __invoke(){
         $test = new GuestPassTest();
         $test->setup();
-        $test->testVerifyData();
+        $test->registerGuestPass();
 
         return response()->json([
             'success' => 'true',
