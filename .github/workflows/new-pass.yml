@@ -17,6 +17,8 @@ jobs:
     
     steps:
     - uses: actions/checkout@v2
+    - name: Client Payload
+      run: 'echo "payload: ${{ toJson(github.event.client_payload) }}"'
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Install Dependencies
