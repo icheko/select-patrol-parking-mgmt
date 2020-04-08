@@ -3,6 +3,10 @@ name: New Pass Available
 on:
   push:
     branches: [ master ]
+    
+  repository_dispatch:
+    types: [parking-pass-register]
+  
   schedule:
     - cron:  '0 16 * * 0-6'
 
