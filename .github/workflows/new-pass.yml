@@ -1,10 +1,10 @@
-name: New Pass
+name: New Pass Available
 
 on:
   push:
     branches: [ master ]
   schedule:
-    - cron:  '40 7 * * 0-6'
+    - cron:  '0 16 * * 0-6'
 
 jobs:
   laravel-tests:
@@ -35,4 +35,4 @@ jobs:
       env:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
-      run: vendor/bin/phpunit --group ignore
+      run: vendor/bin/phpunit --filter registerGuestPass --group ignore
