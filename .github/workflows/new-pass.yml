@@ -1,11 +1,6 @@
 name: New Pass Available
 
 on:
-  push:
-    branches: [ master ]
-    
-  repository_dispatch:
-    types: [parking-pass-register]
   
   schedule:
     - cron:  '0 16 * * 0-6'
@@ -41,4 +36,4 @@ jobs:
       env:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
-      run: vendor/bin/phpunit --filter registerGuestPass --group ignore
+      run: vendor/bin/phpunit --filter isNewGuestPassAvailable --group ignore
