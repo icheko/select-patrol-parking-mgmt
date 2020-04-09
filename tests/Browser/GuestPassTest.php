@@ -26,27 +26,6 @@ class GuestPassTest extends DuskTestCase
     }
 
     /**
-     * @throws \Throwable
-     * @test
-     * @group ignore
-     */
-    public function registerGuestPass(){
-        $contact = new PersonContact();
-        $contact->first_name = 'Jose';
-        $contact->last_name = 'Pacheco';
-        $contact->email = 'icheko@gmail.com';
-        $contact->phone = '8186758615';
-
-        $vehicle = new GuestVehicle();
-        $vehicle->licensePlate = '6NGZ173';
-        $vehicle->make = 'Toyota';
-        $vehicle->model = 'Corolla';
-        $vehicle->color = 'Gray';
-
-        $this->register('14905 W Navarre Way', $contact, $vehicle);
-    }
-
-    /**
      * @return void
      * @throws \Throwable
      */
