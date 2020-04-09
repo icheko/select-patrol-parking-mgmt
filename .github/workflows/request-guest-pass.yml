@@ -36,5 +36,5 @@ jobs:
       env:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
-        REGISTER_GUEST_PASS_PERSON: ${{ github.event.client_payload.person }}
-      run: vendor/bin/phpunit --filter registerGuestPass --group ignore
+        REQUEST_GUEST_PASS_PERSON: ${{ github.event.client_payload.person }}
+      run: vendor/bin/phpunit --filter requestGuestPass --group ignore
