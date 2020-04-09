@@ -5,7 +5,7 @@ namespace Tests\Browser;
 use Tests\DuskTestCase;
 use Throwable;
 
-class GuestPassRegisterAction extends DuskTestCase
+class GuestPassRequestAction extends DuskTestCase
 {
     use GuestPass;
 
@@ -60,9 +60,9 @@ class GuestPassRegisterAction extends DuskTestCase
      * @test
      * @group ignore
      */
-    public function registerGuestPass()
+    public function requestGuestPass()
     {
-        $person = strtolower(env('REGISTER_GUEST_PASS_PERSON'));
+        $person = strtolower(env('REQUEST_GUEST_PASS_PERSON'));
         $personVehicles = json_decode(json_encode($this->personVehicles, true));
 
         if(!isset($personVehicles->$person)){
@@ -71,7 +71,7 @@ class GuestPassRegisterAction extends DuskTestCase
 
         $personVehicle = $personVehicles->$person;
 
-        print("\n\nRegistering\n-------------------------------------------\n");
+        print("\n\nRequesting Pass For\n-------------------------------------------\n");
         print_r($personVehicle);
 
         $vehicle = new GuestVehicle();
@@ -80,7 +80,7 @@ class GuestPassRegisterAction extends DuskTestCase
         $vehicle->model = $personVehicle->vehicle->model;
         $vehicle->color = $personVehicle->vehicle->color;
 
-        $this->register($this->address, $this->contact, $vehicle);
+        $this->request($this->address, $this->contact, $vehicle);
     }
 
 }

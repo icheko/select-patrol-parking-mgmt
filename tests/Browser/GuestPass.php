@@ -112,6 +112,8 @@ trait GuestPass
     }
 
     /**
+     * Request a new guest parking pass
+     *
      * @param String $address
      * @param PersonContact $personContact
      * @param GuestVehicle $guestVehicle
@@ -119,7 +121,7 @@ trait GuestPass
      * @return void
      * @throws \Throwable
      */
-    public function register(String $address, PersonContact $personContact, GuestVehicle $guestVehicle, bool $test = false)
+    public function request(String $address, PersonContact $personContact, GuestVehicle $guestVehicle, bool $test = false)
     {
         $this->addMacros();
         $this->browse(function (Browser $browser) use ($address, $personContact, $guestVehicle, $test) {

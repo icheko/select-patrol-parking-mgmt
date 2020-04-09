@@ -43,7 +43,7 @@ class GuestPassTest extends DuskTestCase
         $vehicle->model = 'Corolla';
         $vehicle->color = 'Gray';
 
-        $this->register('14905 W Navarre Way', $contact, $vehicle, true);
+        $this->request('14905 W Navarre Way', $contact, $vehicle, true);
     }
 
     /**
@@ -94,7 +94,7 @@ class GuestPassTest extends DuskTestCase
         $contact->phone = '8186758615';
 
         try {
-            $this->register('12347 N Aragon Way', $contact, new GuestVehicle);
+            $this->request('12347 N Aragon Way', $contact, new GuestVehicle);
         } catch (\Exception $e) {
             $expectedMessage = 'Your information does not match what we have on file. Please try again.';
             $error = $e->getMessage();
