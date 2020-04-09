@@ -112,20 +112,25 @@ trait GuestPass
     }
 
     /**
-     * @param $address
+     * @param String $address
      * @param PersonContact $personContact
+     * @param GuestVehicle $guestVehicle
+     * @param bool $test
      * @return void
      * @throws \Throwable
      */
-    public function register(String $address, PersonContact $personContact, GuestVehicle $guestVehicle)
+    public function register(String $address, PersonContact $personContact, GuestVehicle $guestVehicle, bool $test = false)
     {
         $this->addMacros();
-        $this->browse(function (Browser $browser) use ($address, $personContact, $guestVehicle) {
+        $this->browse(function (Browser $browser) use ($address, $personContact, $guestVehicle, $test) {
             $this->completeStep1($browser, $address);
             $this->completeStep2($browser, $personContact);
 
             if($error = $this->isStep2Error($browser))
                 throw new \Exception($error);
+
+            if($test)
+                return;
 
             $this->completeStep3($browser, $guestVehicle);
         });

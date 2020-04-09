@@ -30,7 +30,7 @@ class GuestPassTest extends DuskTestCase
      * @test
      * @group ignore
      */
-    public function registerGuestPass(){
+    public function isNewGuestPassAvailable(){
         $contact = new PersonContact();
         $contact->first_name = 'Jose';
         $contact->last_name = 'Pacheco';
@@ -43,7 +43,7 @@ class GuestPassTest extends DuskTestCase
         $vehicle->model = 'Corolla';
         $vehicle->color = 'Gray';
 
-        $this->register('14905 W Navarre Way', $contact, $vehicle);
+        $this->register('14905 W Navarre Way', $contact, $vehicle, true);
     }
 
     /**
