@@ -1,4 +1,4 @@
-name: Register New Guest Pass
+name: Request New Guest Pass
 
 on:
 
@@ -32,7 +32,7 @@ jobs:
       run: ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &
     - name: Run Laravel Server
       run: php artisan serve > /dev/null 2>&1 &
-    - name: Execute tests (Unit/Feature/Browser) via PHPUnit
+    - name: Request New Guest Pass
       env:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
