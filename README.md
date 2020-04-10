@@ -4,7 +4,7 @@ Simple app to register for a guest parking pass at https://www.selectpatrol.com 
 ## Ask Siri
 You can ask Siri to request a parking pass.
 
-Use the [Shotcuts App](https://apps.apple.com/us/app/shortcuts/id915249334) to send a Github API request that will trigger a Github Actions Workflow. The Workflow will then call a [Laravel Dusk](https://laravel.com/docs/5.8/dusk) test case to submit the request.
+Use the [Shortcuts App](https://apps.apple.com/us/app/shortcuts/id915249334) to send a Github API request that will trigger a Github Actions Workflow. The Workflow will then call a [Laravel Dusk](https://laravel.com/docs/5.8/dusk) test case to submit the request.
 
 See [Request Guest Pass Workflow](.github/workflows/request-guest-pass.yml)
 
