@@ -37,13 +37,14 @@ class GuestPassTest extends DuskTestCase
         $contact->email = 'icheko@gmail.com';
         $contact->phone = '8186758615';
 
-        $vehicle = new GuestVehicle();
-        $vehicle->licensePlate = '6NGZ173';
-        $vehicle->make = 'Toyota';
-        $vehicle->model = 'Corolla';
-        $vehicle->color = 'Gray';
+        $address = '14905 W Navarre Way';
 
-        $this->request('14905 W Navarre Way', $contact, $vehicle, true);
+        $this->addMacros();
+        $this->browse(function (Browser $browser) use ($address, $contact) {
+            $this->completeStep1($browser, $address);
+            $this->completeStep2($browser, $contact);
+            $browser->assertSee('Guest Vehicle Information');
+        });
     }
 
     /**

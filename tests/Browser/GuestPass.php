@@ -2,9 +2,12 @@
 
 namespace Tests\Browser;
 
+use Exception;
+use Facebook\WebDriver\Exception\NoSuchElementException;
 use Laravel\Dusk\Chrome\SupportsChrome;
 use Laravel\Dusk\Browser;
 use Laravel\Dusk\Concerns\ProvidesBrowser;
+use Throwable;
 
 trait GuestPass
 {
@@ -119,21 +122,14 @@ trait GuestPass
      * @param GuestVehicle $guestVehicle
      * @param bool $test
      * @return void
-     * @throws \Throwable
+     * @throws Throwable
      */
-    public function request(String $address, PersonContact $personContact, GuestVehicle $guestVehicle, bool $test = false)
+    public function request(String $address, PersonContact $personContact, GuestVehicle $guestVehicle)
     {
         $this->addMacros();
-        $this->browse(function (Browser $browser) use ($address, $personContact, $guestVehicle, $test) {
+        $this->browse(function (Browser $browser) use ($address, $personContact, $guestVehicle) {
             $this->completeStep1($browser, $address);
             $this->completeStep2($browser, $personContact);
-
-            if($error = $this->isStep2Error($browser))
-                throw new \Exception($error);
-
-            if($test)
-                return;
-
             $this->completeStep3($browser, $guestVehicle);
         });
     }
@@ -161,6 +157,7 @@ trait GuestPass
     /**
      * @param $browser
      * @param PersonContact $personContact
+     * @throws Exception
      */
     public function completeStep2($browser, PersonContact $personContact){
         $browser->assertSee('If you do not fill out your email address')
@@ -169,6 +166,9 @@ trait GuestPass
                 ->type('ctl00$ContentPlaceHolder1$Wizard1$WucContactInfo1$wucPhone$stxtPhone', $personContact->phone)
                 ->type('ctl00$ContentPlaceHolder1$Wizard1$WucContactInfo1$stxtEmailAddress', $personContact->email)
                 ->press('ctl00$ContentPlaceHolder1$Wizard1$StepNavigationTemplateContainerID$StepNextButton');
+
+        if($error = $this->isStep2Error($browser))
+            throw new Exception($error);
     }
 
     /**
@@ -189,7 +189,11 @@ trait GuestPass
      */
     public function isStep2Error($browser){
         $selector = '#ContentPlaceHolder1_Wizard1_lblNoMatch';
-        $error = $browser->text($selector);
+        try {
+            $error = $browser->text($selector);
+        }catch(NoSuchElementException $exception){
+            $error = '';
+        }
 
         if($error == '')
             return false;
