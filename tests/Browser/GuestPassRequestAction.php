@@ -37,7 +37,10 @@ class GuestPassRequestAction extends DuskTestCase
         $guestVehicle->model = $vehicle->model;
         $guestVehicle->color = $vehicle->color;
 
-        $this->request($this->getPropertyAddress(), $this->getContact(), $guestVehicle);
+        $confirmation = $this->request($this->getPropertyAddress(), $this->getContact(), $guestVehicle);
+
+        print("\n\nConfirmation\n-------------------------------------------\n\n");
+        echo $confirmation;
     }
 
 }

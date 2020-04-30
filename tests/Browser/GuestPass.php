@@ -121,17 +121,21 @@ trait GuestPass
      * @param PersonContact $personContact
      * @param GuestVehicle $guestVehicle
      * @param bool $test
-     * @return void
+     * @return string
      * @throws Throwable
      */
     public function request(String $address, PersonContact $personContact, GuestVehicle $guestVehicle)
     {
+        $confirmation = '';
         $this->addMacros();
-        $this->browse(function (Browser $browser) use ($address, $personContact, $guestVehicle) {
+        $this->browse(function (Browser $browser) use ($address, $personContact, $guestVehicle, &$confirmation) {
             $this->completeStep1($browser, $address);
             $this->completeStep2($browser, $personContact);
             $this->completeStep3($browser, $guestVehicle);
+            $confirmation = $this->getConfirmation($browser);
         });
+
+        return $confirmation;
     }
 
     /**
@@ -179,8 +183,18 @@ trait GuestPass
                 ->type('ctl00$ContentPlaceHolder1$Wizard1$wucVehicleInfo1$stxtLicensePlate', $guestVehicle->licensePlate)
                 ->select('ctl00$ContentPlaceHolder1$Wizard1$wucVehicleInfo1$scboVehicleMake', $guestVehicle->make)
                 ->type('ctl00$ContentPlaceHolder1$Wizard1$wucVehicleInfo1$stxtVehicleModel', $guestVehicle->model)
-                ->select('ctl00$ContentPlaceHolder1$Wizard1$wucVehicleInfo1$scboVehicleColor', $guestVehicle->color);
-                //->assertInputValue('ctl00$ContentPlaceHolder1$Wizard1$FinishNavigationTemplateContainerID$FinishButton', 'Finish');
+                ->select('ctl00$ContentPlaceHolder1$Wizard1$wucVehicleInfo1$scboVehicleColor', $guestVehicle->color)
+                ->press('ctl00$ContentPlaceHolder1$Wizard1$FinishNavigationTemplateContainerID$FinishButton')
+                ->assertSee('The vehicle(s) has now been registered with Select Patrol Agency under the guest vehicle license plate number.');
+    }
+
+    /**
+     * Get confirmation text
+     * @param $browser
+     * @return string
+     */
+    public function getConfirmation($browser){
+        return $browser->text('#ContentPlaceHolder1_Wizard1_divConfirmation');
     }
 
     /**
