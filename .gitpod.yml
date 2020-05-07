@@ -12,6 +12,7 @@ tasks:
   - init: |
       alias artisan='php artisan'
       alias phpunit='./vendor/bin/phpunit'
+      alias start-chrome='php artisan dusk:chrome-driver 80 && ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &'
     command: echo "artisan|phpunit" command is available here
     
 ports:
