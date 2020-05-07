@@ -1,3 +1,4 @@
+image: bitnami/laravel:7
 tasks:
   - init: npm install
     command: npm run watch
@@ -16,4 +17,4 @@ tasks:
     command: echo "artisan|phpunit" command is available here
     
 ports:
-  - port: 8000
+  - port: 3000
