@@ -1,4 +1,5 @@
-image: bitnami/laravel:7
+image:
+  file: .gitpod.Dockerfile
 tasks:
   - init: npm install
     command: npm run watch
@@ -17,4 +18,4 @@ tasks:
     command: echo "artisan|phpunit" command is available here
     
 ports:
-  - port: 3000
+  - port: 8000
