@@ -9,3 +9,10 @@ tasks:
       mkdir -p database
       touch database/database.sqlite
     command: php artisan serve
+  - init: |
+      alias artisan='php artisan'
+      alias phpunit='./vendor/bin/phpunit'
+    command: echo "artisan|phpunit" command is available here
+    
+ports:
+  - port: 8000
