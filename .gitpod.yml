@@ -1,6 +1,9 @@
 image:
   file: .gitpod.Dockerfile
-  
+
+ports:
+  - port: 8000
+
 tasks:
   - init: npm install
     command: npm run watch
@@ -16,7 +19,4 @@ tasks:
       alias artisan='php artisan'
       alias phpunit='./vendor/bin/phpunit'
       alias start-chrome='php artisan dusk:chrome-driver 80 && ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &'
-    command: echo "artisan|phpunit" command is available here
-    
-ports:
-  - port: 8000
+    command: echo "artisan|phpunit|start-chrome" command is available here
