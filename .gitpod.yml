@@ -1,5 +1,11 @@
 tasks:
   - init: npm install
     command: npm run watch
-  - init: composer install
-    command: alias artisan='php artisan'
+  - init: |
+      php -r "file_exists('.env') || copy('.env.example', '.env');"
+      composer install -q --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+      php artisan key:generate
+      chmod -R 777 storage bootstrap/cache
+      mkdir -p database
+      touch database/database.sqlite
+    command: php artisan serve
