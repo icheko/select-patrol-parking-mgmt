@@ -1,3 +1,5 @@
 tasks:
   - init: npm install
     command: npm run watch
+  - init: composer install
+    command: alias artisan='php artisan'
