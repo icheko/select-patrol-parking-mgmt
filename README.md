@@ -1,6 +1,8 @@
 # select-patrol-parking-mgmt
 Simple app to register for a guest parking pass at https://www.selectpatrol.com automatically. [Laravel Dusk](https://laravel.com/docs/5.8/dusk) is used to navigate the site and submit a request.
 
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/icheko/select-patrol-parking-mgmt)
+
 ## Ask Siri
 You can ask Siri to request a parking pass.
 
