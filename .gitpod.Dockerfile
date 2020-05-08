@@ -2,10 +2,9 @@ FROM gitpod/workspace-full
 
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 
-# Install chrome/chrome-driver requirements
+# Install custom tools, runtime, etc.
 RUN sudo apt-get update \
     && sudo apt-get install -y \
-        gdebi-core \
         fonts-liberation \
         libappindicator3-1 \
         libdrm2 \
@@ -17,4 +16,4 @@ RUN sudo apt-get update \
         libnss3-dev \
     && sudo rm -rf /var/lib/apt/lists/*
 
-RUN sudo gdebi google-chrome-stable_current_amd64.deb
+RUN sudo dpkg -i google-chrome-stable_current_amd64.deb
