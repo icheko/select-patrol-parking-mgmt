@@ -1,7 +1,7 @@
 name: New Pass Available
 
 on:
-  
+
   schedule:
     - cron:  '0 16 * * 0-6'
 
@@ -9,7 +9,7 @@ jobs:
   laravel-tests:
 
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v2
     - name: Client Payload
@@ -27,7 +27,7 @@ jobs:
         mkdir -p database
         touch database/database.sqlite
     - name: Upgrade Chrome Driver
-      run: php artisan dusk:chrome-driver 80
+      run: php artisan dusk:chrome-driver 83
     - name: Start Chrome Driver
       run: ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &
     - name: Run Laravel Server
